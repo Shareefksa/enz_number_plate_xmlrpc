@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherited user view for Adding API key.  -->
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">view.users.form.inherit.rest.api.odoo</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Token Details" name="token_details">
+                    <group>
+                        <field name="token_for_user"/>
+                        <field name="toke_validity_hours"/>
+                        <field name="subscription_type" widget="radio" options="{'horizontal': true}"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <!-- Attendance Views -->
+    <record id="view_attendance_log_form" model="ir.ui.view">
+        <field name="name">attendance.log.details.form</field>
+        <field name="model">attendance.log.details</field>
+        <field name="arch" type="xml">
+            <form string="Attendance">
+                <sheet>
+                    <div class="oe_avatar">
+                        <field name="face_image" widget="image" class="oe_avatar"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Plate Number"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="employee_id"/>
+                            <field name="in_camera_id"/>
+                            <field name="out_camera_id"/>
+                            <field name="check_in_time"/>
+                            <field name="check_out_time"/>
+                        </group>
+                        <group>
+                            <field name="person_image" widget="image" class="oe_avatar"/>
+                            <field name="duration"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_attendance_log_tree" model="ir.ui.view">
+        <field name="name">attendance.log.details.tree</field>
+        <field name="model">attendance.log.details</field>
+        <field name="arch" type="xml">
+            <tree string="Attendance">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="check_in_time"/>
+                <field name="check_out_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <odoo>
+    <record id="view_attendance_log_details_search" model="ir.ui.view">
+        <field name="name">attendance.log.details.search</field>
+        <field name="model">attendance.log.details</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <!-- Group By Options -->
+                <group expand="1" string="Group By">
+                    <filter string="Name" name="group_by_plate" context="{'group_by': 'employee_id'}" />
+                    <filter string="Check-In Time" name="group_by_checkin" context="{'group_by': 'check_in_time'}" />
+                </group>
+
+                <!-- Search Fields -->
+                <field name="name" string="Plate Number"/>
+                <field name="check_in_time" string="Check-In Time"/>
+            </search>
+        </field>
+    </record>
+</odoo>
+
+
+    <record id="action_attendance_log" model="ir.actions.act_window">
+        <field name="name">Attendance Log</field>
+        <field name="res_model">attendance.log.details</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <menuitem id="menu_attendance_log" name="Attendance Logs" parent="menu_vehicle_log_main"
+              action="action_attendance_log" sequence="1"/>
+</odoo>

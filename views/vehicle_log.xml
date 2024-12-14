@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <!-- Early Leave Views -->
+    <record id="view_vehicle_log_form" model="ir.ui.view">
+        <field name="name">vehicle.log.details.form</field>
+        <field name="model">vehicle.log.details</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle Log">
+                <sheet>
+                    <div class="oe_avatar">
+                        <field name="vehicle_image" widget="image" class="oe_avatar"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Plate Number"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="plate_id"/>
+                            <field name="in_camera_id"/>
+                            <field name="out_camera_id"/>
+                            <field name="check_in_time"/>
+                            <field name="check_out_time"/>
+                        </group>
+                        <group>
+                            <field name="body_image" widget="image" class="oe_avatar"/>
+                            <field name="duration"/>
+                            <field name="amount"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_vehicle_log_tree" model="ir.ui.view">
+        <field name="name">vehicle.log.details.tree</field>
+        <field name="model">vehicle.log.details</field>
+        <field name="arch" type="xml">
+            <tree string="Vehicle Log">
+                <field name="name"/>
+                <field name="plate_id"/>
+                <field name="check_in_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <odoo>
+    <record id="view_vehicle_log_details_search" model="ir.ui.view">
+        <field name="name">vehicle.log.details.search</field>
+        <field name="model">vehicle.log.details</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Filters -->
+                <filter string="Has Image" name="has_image" domain="[('vehicle_image', '!=', False)]" />
+                <filter string="No Image" name="no_image" domain="[('vehicle_image', '=', False)]" />
+
+                <!-- Group By Options -->
+                <group expand="1" string="Group By">
+                    <filter string="Plate Number" name="group_by_plate" context="{'group_by': 'plate_id'}" />
+                    <filter string="Check-In Time" name="group_by_checkin" context="{'group_by': 'check_in_time'}" />
+                </group>
+
+                <!-- Search Fields -->
+                <field name="name" string="Plate Number"/>
+                <field name="check_in_time" string="Check-In Time"/>
+            </search>
+        </field>
+    </record>
+</odoo>
+
+
+    <record id="action_vehicle_log" model="ir.actions.act_window">
+        <field name="name">Vehicle Log</field>
+        <field name="res_model">vehicle.log.details</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_vehicle_log_main" name="Logs" parent="menu_number_plate_main"
+              sequence="1"/>
+    <menuitem id="menu_vehicle_log" name="VehicleLogs" parent="menu_vehicle_log_main"
+              action="action_vehicle_log" sequence="1"/>
+</odoo>

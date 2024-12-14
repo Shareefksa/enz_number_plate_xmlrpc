@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <!-- Early Leave Views -->
+    <record id="view_parking_rate_form" model="ir.ui.view">
+        <field name="name">res.parking.rate.form</field>
+        <field name="model">res.parking.rate</field>
+        <field name="arch" type="xml">
+            <form string="parking_rate">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="duration_in_hours"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <label for="active"/>
+                            <h3>
+                                <field name="active" widget="boolean_toggle"/>
+                            </h3>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_parking_rate_tree" model="ir.ui.view">
+        <field name="name">res.parking.rate.tree</field>
+        <field name="model">res.parking.rate</field>
+        <field name="arch" type="xml">
+            <tree string="parking_rate">
+                <field name="duration_in_hours"/>
+                <field name="amount"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_parking_rate_search" model="ir.ui.view">
+        <field name="name">res.parking.rate.search</field>
+        <field name="model">res.parking.rate</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Filters -->
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+
+                <!-- Search Fields -->
+                <field name="amount" string="Amount"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_parking_rate" model="ir.actions.act_window">
+        <field name="name">Parking Rate</field>
+        <field name="res_model">res.parking.rate</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_parking_rate" name="Parking Rate" parent="menu_number_plate_configuration"
+              action="action_parking_rate" sequence="2"/>
+</odoo>

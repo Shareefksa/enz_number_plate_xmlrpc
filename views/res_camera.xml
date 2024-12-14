@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <!-- Early Leave Views -->
+    <record id="view_camera_form" model="ir.ui.view">
+        <field name="name">res.camera.form</field>
+        <field name="model">res.camera</field>
+        <field name="arch" type="xml">
+            <form string="Camera">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Camera Id"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="service_id"/>
+                            <field name="service_type" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                        <group>
+                            <label for="active"/>
+                            <h3>
+                                <field name="active" widget="boolean_toggle"/>
+                            </h3>
+                            <label for="pay_park" attrs="{'invisible':[('service_type','=','entry')]}"/>
+                            <h3 attrs="{'invisible':[('service_type','=','entry')]}">
+                                <field name="pay_park" widget="boolean_toggle" attrs="{'invisible':[('service_type','=','entry')]}"/>
+                            </h3>
+                            <label for="register_new_plate" attrs="{'invisible':[('service_type','=','exit')]}"/>
+                            <h3 attrs="{'invisible':[('service_type','=','exit')]}">
+                                <field name="register_new_plate" widget="boolean_toggle"  attrs="{'invisible':[('service_type','=','exit')]}"/>
+                            </h3>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_camera_tree" model="ir.ui.view">
+        <field name="name">res.camera.tree</field>
+        <field name="model">res.camera</field>
+        <field name="arch" type="xml">
+            <tree string="Camera">
+                <field name="name"/>
+                <field name="service_id"/>
+                <field name="service_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_camera_search" model="ir.ui.view">
+        <field name="name">res.camera.search</field>
+        <field name="model">res.camera</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Filters -->
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+
+                <!-- Search Fields -->
+                <field name="name" string="Camera"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_camera" model="ir.actions.act_window">
+        <field name="name">Number Plates</field>
+        <field name="res_model">res.camera</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_camera" name="Camera" parent="menu_number_plate_configuration"
+              action="action_camera" sequence="2"/>
+    <menuitem id="menu_person_id" name="Employee" parent="menu_number_plate_configuration"
+              action="hr.open_view_employee_list_my" sequence="2"/>
+</odoo>

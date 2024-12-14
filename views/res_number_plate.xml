@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <!-- Early Leave Views -->
+    <record id="view_number_plate_form" model="ir.ui.view">
+        <field name="name">res.number.plate.form</field>
+        <field name="model">res.number.plate</field>
+        <field name="arch" type="xml">
+            <form string="Number Plates">
+                <sheet>
+                    <div class="oe_avatar">
+                        <field name="vehicle_image" widget="image" class="oe_avatar"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Number Plate"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="active"/>
+                            <h3>
+                                <field name="active" widget="boolean_toggle"/>
+                            </h3>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_number_plate_tree" model="ir.ui.view">
+        <field name="name">res.number.plate.tree</field>
+        <field name="model">res.number.plate</field>
+        <field name="arch" type="xml">
+            <tree string="Number Plate">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_number_plate_search" model="ir.ui.view">
+        <field name="name">res.number.plate.search</field>
+        <field name="model">res.number.plate</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Filters -->
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+
+                <!-- Group By Options -->
+                <group expand="1" string="Group By">
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'active'}"/>
+                </group>
+
+                <!-- Search Fields -->
+                <field name="name" string="Number Plate"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_number_plate" model="ir.actions.act_window">
+        <field name="name">Number Plates</field>
+        <field name="res_model">res.number.plate</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="EnzNode" id="menu_number_plate_main"
+              sequence="8"/>
+
+    <menuitem id="menu_number_plate_configuration" name="Configuration" parent="menu_number_plate_main"
+              sequence="100"/>
+    <menuitem id="menu_number_plate" name="Number Plates" parent="menu_number_plate_configuration"
+              action="action_number_plate" sequence="1"/>
+</odoo>

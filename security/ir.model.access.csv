@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_detection_services,access.res.detection.services,model_res_detection_services,,1,1,1,1
+access_res_number_plate,access.res.number.plate,model_res_number_plate,,1,1,1,1
+access_res_camera,access.res.camera,model_res_camera,,1,1,1,1
+access_res_parking_rate,access.res.parking.rate,model_res_parking_rate,,1,1,1,1
+access_vehicle_log_details,access.vehicle.log.details,model_vehicle_log_details,,1,1,1,1
+access_attendance_log_details,access.attendance.log.details,model_attendance_log_details,,1,1,1,1
