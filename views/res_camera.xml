@@ -17,8 +17,14 @@
                     </div>
                     <group>
                         <group>
+                            <field name="mac_id"/>
                             <field name="service_id"/>
                             <field name="service_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="rtsp_link"/>
+                            <field name="x1"/>
+                            <field name="y1"/>
+                            <field name="x2"/>
+                            <field name="y2"/>
                         </group>
                         <group>
                             <label for="active"/>
@@ -33,6 +39,7 @@
                             <h3 attrs="{'invisible':[('service_type','=','exit')]}">
                                 <field name="register_new_plate" widget="boolean_toggle"  attrs="{'invisible':[('service_type','=','exit')]}"/>
                             </h3>
+                            <field name="camera_image" widget="image"/>
                         </group>
                     </group>
                 </sheet>

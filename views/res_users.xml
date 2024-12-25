@@ -10,7 +10,7 @@
                 <page string="Token Details" name="token_details">
                     <group>
                         <field name="token_for_user"/>
-                        <field name="toke_validity_hours"/>
+                        <field name="token_validity_hours"/>
                         <field name="subscription_type" widget="radio" options="{'horizontal': true}"/>
                     </group>
                 </page>

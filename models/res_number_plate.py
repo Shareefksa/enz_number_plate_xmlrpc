@@ -38,7 +38,7 @@ class ResNumberPlate(models.Model):
 
             # Token is valid, fetch details from each model
             number_plate_records = self.env['res.number.plate'].search([('active', '=', True)])
-            camera_records = self.env['res.camera'].search([('active', '=', True)])
+            # camera_records = self.env['res.camera'].search([('active', '=', True)])
             detection_service_records = self.env['res.detection.services'].search([('active', '=', True)])
             parking_rate_records = self.env['res.parking.rate'].search([('active', '=', True)])
 
@@ -50,17 +50,17 @@ class ResNumberPlate(models.Model):
                         'active': record.active
                     } for record in number_plate_records
                 ],
-                'cameras': [
-                    {
-                        'id': record.id,
-                        'name': record.name,
-                        'service_id': record.service_id.name if record.service_id else None,
-                        'service_type': record.service_type,
-                        'register_new_plate': record.register_new_plate,
-                        'pay_park': record.pay_park,
-                        'active': record.active
-                    } for record in camera_records
-                ],
+                # 'cameras': [
+                #     {
+                #         'id': record.id,
+                #         'name': record.name,
+                #         'service_id': record.service_id.name if record.service_id else None,
+                #         'service_type': record.service_type,
+                #         'register_new_plate': record.register_new_plate,
+                #         'pay_park': record.pay_park,
+                #         'active': record.active
+                #     } for record in camera_records
+                # ],
                 'detection_services': [
                     {
                         'id': record.id,
