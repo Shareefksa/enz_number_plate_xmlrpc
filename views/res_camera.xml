@@ -8,6 +8,10 @@
         <field name="model">res.camera</field>
         <field name="arch" type="xml">
             <form string="Camera">
+                <header>
+                    <button string="Process Image" type="object" name="process_image" class="btn-primary"/>
+                    <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <label for="name" string="Camera Id"/>
@@ -21,10 +25,40 @@
                             <field name="service_id"/>
                             <field name="service_type" widget="radio" options="{'horizontal': true}"/>
                             <field name="rtsp_link"/>
-                            <field name="x1"/>
-                            <field name="y1"/>
-                            <field name="x2"/>
-                            <field name="y2"/>
+                            <field name="ip_address"/>
+                            <!--                            <field name="x1" string="Distance From Left (X1)"/>-->
+                            <!--                            <field name="x2" string="Distance From Right (X2)"/>-->
+                            <!--                            <field name="y1" string="Distance From Top (Y1)"/>-->
+                            <!--                            <field name="y2" string="Distance From Bottom (Y2)"/>-->
+<!--                            <field name="x1" string="Distance From Left"/>-->
+<!--                            <field name="x2" string="Distance From Right"/>-->
+<!--                            <field name="y1" string="Distance From Top"/>-->
+<!--                            <field name="y2" string="Distance From Bottom"/>-->
+                            <label for="x1" string="Distance From Left"/>
+                            <div class="o_row">
+                                <field name="x1"/>
+                                <span>X1</span>
+                            </div>
+                            <label for="x2" string="Distance From Right"/>
+                            <div class="o_row">
+                                <field name="x2"/>
+                                <span>X2</span>
+                            </div>
+                            <label for="y1" string="Distance From Top"/>
+                            <div class="o_row">
+                                <field name="y1"/>
+                                <span>Y1</span>
+                            </div>
+                            <label for="y2" string="Distance From Bottom"/>
+                            <div class="o_row">
+                                <field name="y2"/>
+                                <span>Y2</span>
+                            </div>
+                            <label for="line_y" string="Mark Concentrated Area"/>
+                            <div class="o_row">
+                                <field name="line_y"/>
+                                <span>Line Y</span>
+                            </div>
                         </group>
                         <group>
                             <label for="active"/>
@@ -33,13 +67,16 @@
                             </h3>
                             <label for="pay_park" attrs="{'invisible':[('service_type','=','entry')]}"/>
                             <h3 attrs="{'invisible':[('service_type','=','entry')]}">
-                                <field name="pay_park" widget="boolean_toggle" attrs="{'invisible':[('service_type','=','entry')]}"/>
+                                <field name="pay_park" widget="boolean_toggle"
+                                       attrs="{'invisible':[('service_type','=','entry')]}"/>
                             </h3>
                             <label for="register_new_plate" attrs="{'invisible':[('service_type','=','exit')]}"/>
                             <h3 attrs="{'invisible':[('service_type','=','exit')]}">
-                                <field name="register_new_plate" widget="boolean_toggle"  attrs="{'invisible':[('service_type','=','exit')]}"/>
+                                <field name="register_new_plate" widget="boolean_toggle"
+                                       attrs="{'invisible':[('service_type','=','exit')]}"/>
                             </h3>
                             <field name="camera_image" widget="image"/>
+                            <field name="result_camera_image" widget="image"/>
                         </group>
                     </group>
                 </sheet>

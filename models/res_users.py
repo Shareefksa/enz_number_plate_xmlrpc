@@ -146,7 +146,9 @@ class ResUsers(models.Model):
                 raise UserError(_("Service Type Not Configured: %s") % camera.name)
             rtsp_details = {
                 'rtsp_link' : camera.rtsp_link,
-                'service_type' : camera.service_type
+                'service_type' : camera.service_type,
+                'camera_id' : camera.name,
+                'camera_state' : camera.status,
             }
 
 
@@ -245,6 +247,7 @@ class ResUsers(models.Model):
                 'y1': camera.y1,
                 'x2': camera.x2,
                 'y2': camera.y2,
+                'line_y': camera.line_y,
                 'status':'success'
             }
 
